@@ -10,8 +10,8 @@ source:
   sha256: 5426cd5ff70835b9d6b54de60b8d7b850eb63758c7443378bcb6d84601a69075
 
 build:
-  script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  script: ISO_USE_DEFAULT_CXX=TRUE {{ PYTHON }} python setup.py install
+  number: 1
   run_exports:
       - {{ pin_subpackage('isospecpy', max_pin="x.x") }}
 
@@ -19,10 +19,12 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - setuptools
   host:
     - python
     - cffi
     - pip
+    - setuptools
   run:
     - python
     - cffi
